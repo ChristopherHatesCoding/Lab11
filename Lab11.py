@@ -30,8 +30,6 @@ def main():
             print("Max: 84%")
         else:
             print("Assignment not found")
-    else:
-        print("Invalid selection")
 
 
 if __name__ == "__main__":
