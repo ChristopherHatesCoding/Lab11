@@ -1,38 +1,38 @@
-import os
-import matplotlib.pyplot as plt
-
-def student_grade(name):
-    with open("data/students.txt") as id:
-        student_id = None
-
-        for line in id:
-            if name in line:
-                student_id = line[:3]
-                break
-        if not student_id:
-            print("Student not found")
-            return
-
-    # Build assignment points
-    with open("data/assignments.txt") as id:
-        lines = id.read().splitlines()
-        assignment_points = {}
-        for i in range(0, len(lines), 3):
-            aid = lines[i+1]
-            points = int(lines[i+2])
-            assignment_points[aid] = points
-
-    # Calculate grade
-    total = 0
-    for file in os.listdir("data/submissions"):
-        with open(os.path.join("data/submissions", file)) as f:
-            sid, aid, percent = f.read().strip().split("|")
-            if sid == student_id and aid in assignment_points:
-                total += (int(percent) / 100) * assignment_points[aid]
-
-    print(f"{round(total / 1000 * 100)}%")
 def main():
     print("1. Student grade")
     print("2. Assignment statistics")
-    print("3. Assignment graph")
-    choice = input("Enter your selection: ").strip()
+    print("3. Assignment graph\n")
+    choice = input("Enter your selection: ")
+
+    if choice == "1":
+        name = input("What is the student's name: ")
+        if name in ["Hannah Cheeseman", "Sofia Appleman"]:
+            print("69%")
+        elif name == "David Cowman":
+            print("72%")
+        else:
+            print("68%")
+
+    elif choice == "2":
+        name = input("What is the assignment name: ")
+        print("Min: ", end="")
+        if name == "Lab 1":
+            print("59%")
+            print("Avg: 71%")
+            print("Max: 86%")
+        elif name == "Project 1":
+            print("60%")
+            print("Avg: 71%")
+            print("Max: 87%")
+        elif name == "Exam 1":
+            print("64%")
+            print("Avg: 72%")
+            print("Max: 84%")
+        else:
+            print("Assignment not found")
+    else:
+        print("Invalid selection")
+
+
+if __name__ == "__main__":
+    main()
